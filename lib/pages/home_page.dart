@@ -19,22 +19,27 @@ class _HomepageState extends State<Homepage> {
     // Donut tab
     const MyTab(
       iconPath: 'lib/icons/donut.png',
+      tabName: 'Donuts',
     ),
     //Burger tab
     const MyTab(
       iconPath: 'lib/icons/burger.png',
+      tabName: 'Burger',
     ),
     // Smoothie tab
     const MyTab(
       iconPath: 'lib/icons/smoothie.png',
+      tabName: 'Smothie',
     ),
     // Pancake tab
     const MyTab(
       iconPath: 'lib/icons/pancakes.png',
+      tabName: 'Pancake',
     ),
     //Pizza tab
     const MyTab(
       iconPath: 'lib/icons/pizza.png',
+      tabName: 'Pizza',
     )
   ];
 
@@ -81,19 +86,64 @@ class _HomepageState extends State<Homepage> {
             ),
 
             // Tab Bar
-            TabBar(tabs: myTabs),
+            TabBar(
+              tabs: myTabs,
+              //Color del texto seleccionado
+              labelColor: Colors.pink,
+              //Color del texto no seleccionado
+              unselectedLabelColor: Colors.grey,
+            ),
 
             // Tab Bar View
             Expanded(
                 child: TabBarView(children: [
               DonutTab(),
               BurgerTab(),
-              SmoothieTab(),
-              PancakeTab(),
-              PizzaTab()
+              const SmoothieTab(),
+              const PancakeTab(),
+              const PizzaTab()
             ])),
 
             // Carrito
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 28),
+                    child: Column(
+                      // Alineado a la izquierda
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "2 Items | \$45",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "Delivery Charges Included",
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.pink,
+                      ),
+                      child: const Text(
+                        "View Cart",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ))
+                ],
+              ),
+            )
           ],
         ),
       ),
