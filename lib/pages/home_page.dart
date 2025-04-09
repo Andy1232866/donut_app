@@ -1,8 +1,11 @@
+import 'package:donut_app/pages/cart_page.dart';
+import 'package:donut_app/pages/user_info.dart';
 import 'package:donut_app/tabs/burger_tab.dart';
 import 'package:donut_app/tabs/donut_tab.dart';
 import 'package:donut_app/tabs/pancake_tab.dart';
 import 'package:donut_app/tabs/pizza_tab.dart';
 import 'package:donut_app/tabs/smoothie_tab.dart';
+import 'package:donut_app/utils/drawer.dart';
 
 import 'package:donut_app/utils/my_tab.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +18,17 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  int cartItemCount = 0;
+  int totalPrice = 0;
+
+  // Método para agregar productos al carrito
+  void addToCart(int price) {
+    setState(() {
+      cartItemCount++;
+      totalPrice += price;
+    });
+  }
+
   List<Widget> myTabs = [
     // Donut tab
     const MyTab(
@@ -29,7 +43,7 @@ class _HomepageState extends State<Homepage> {
     // Smoothie tab
     const MyTab(
       iconPath: 'lib/icons/smoothie.png',
-      tabName: 'Smothie',
+      tabName: 'Smoothie',
     ),
     // Pancake tab
     const MyTab(
@@ -48,18 +62,36 @@ class _HomepageState extends State<Homepage> {
     return DefaultTabController(
       length: myTabs.length,
       child: Scaffold(
+        drawer: const DrawerApp(),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          leading: Icon(
-            Icons.menu,
-            color: Colors.grey[800],
+          leading: Builder(
+            builder: (context) {
+              return IconButton(
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                icon: Icon(
+                  Icons.menu,
+                  color: Colors.grey[800],
+                ),
+              );
+            },
           ),
           actions: [
             Padding(
               // Agregamos padding a la derecha
               padding: const EdgeInsets.only(right: 12.0),
-              child:
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.person)),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const UserInfo(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.person)),
             )
           ],
         ),
@@ -67,7 +99,7 @@ class _HomepageState extends State<Homepage> {
           children: [
             // Texto "I want to eat"
             const Padding(
-              padding: EdgeInsets.only(left: 24),
+              padding: EdgeInsets.only(left: 24, bottom: 5),
               child: Row(
                 children: [
                   Text(
@@ -96,13 +128,26 @@ class _HomepageState extends State<Homepage> {
 
             // Tab Bar View
             Expanded(
-                child: TabBarView(children: [
-              DonutTab(),
-              BurgerTab(),
-              const SmoothieTab(),
-              const PancakeTab(),
-              const PizzaTab()
-            ])),
+              child: TabBarView(
+                children: [
+                  DonutTab(
+                    onAdd: addToCart,
+                  ),
+                  BurgerTab(
+                    onAdd: addToCart,
+                  ),
+                  SmoothieTab(
+                    onAdd: addToCart,
+                  ),
+                  PancakeTab(
+                    onAdd: addToCart,
+                  ),
+                  PizzaTab(
+                    onAdd: addToCart,
+                  )
+                ],
+              ),
+            ),
 
             // Carrito
             Container(
@@ -111,18 +156,18 @@ class _HomepageState extends State<Homepage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 28),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 28),
                     child: Column(
                       // Alineado a la izquierda
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "2 Items | \$45",
-                          style: TextStyle(
+                          "$cartItemCount Items | \$$totalPrice",
+                          style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        const Text(
                           "Delivery Charges Included",
                           style: TextStyle(
                             fontSize: 12,
@@ -132,7 +177,13 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CartPage(),
+                            ));
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.pink,
                       ),

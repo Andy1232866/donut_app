@@ -26,7 +26,7 @@ class MyTab extends StatelessWidget {
         ),
         Text(
           tabName,
-          style: const TextStyle(fontSize: 10),
+          style: const TextStyle(fontSize: 9),
         ),
         const SizedBox(
           height: 5,
