@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "696637667287",
+    "project_id": "donut-app1",
+    "storage_bucket": "donut-app1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696637667287:android:fcb9ba6046774018877d92",
+        "android_client_info": {
+          "package_name": "com.example.donut_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "696637667287-snfuu9h4iqo05dnf9v3mdh2r76hdst48.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.donut_app",
+            "certificate_hash": "1f468e2c665f8c63b1a43fe1e855affe3014c6aa"
+          }
+        },
+        {
+          "client_id": "696637667287-m89s7o7brsi4774kvs2mvkk4qqq4kglt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCjHKqRPoO9WDSG6Ct8rpi82lAkserD5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "696637667287-m89s7o7brsi4774kvs2mvkk4qqq4kglt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
