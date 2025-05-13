@@ -11,7 +11,7 @@ class BurgerTile extends StatelessWidget {
   final double borderRadius = 24;
   const BurgerTile(
       {super.key,
-      required this.burgerFlavor,
+      required this.burgerFlavor, //variables
       required this.burgerPrice,
       required this.burgerColor,
       required this.imageName,

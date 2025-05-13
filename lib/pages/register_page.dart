@@ -312,16 +312,22 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
+
+                /// - Recopila los datos ingresados en los campos de texto (`email`, `name`, `username`, `password`).
+                /// - Llama al método `createUser` del servicio `CreateUser` para registrar la cuenta.
+                /// - Si el registro es exitoso, redirige al usuario a la página de verificación de correo.
+                /// - Si ocurre un error, muestra un mensaje en la consola.
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () async {
+                    //Obtiene los datos del usuario
                     String email = emailController.text.trim();
                     String name = nameController.text.trim();
                     String username = userController.text.trim();
                     String password = passwordController.text.trim();
-
+                     // Crea una instancia del servicio CreateUser.
                     final CreateUser newUser = CreateUser();
-
+                    // Intenta crear un usuario con los datos proporcionados.
                     User? user = await newUser.createUser(
                       email,
                       password,
