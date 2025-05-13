@@ -20,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _obscureText = true;
 
+//Funcion principal que contiene la interfaz de login
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Form(
-                      key: _formKey,
+                      key: _formKey, //Para validar los campos nulos
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Column(
@@ -126,6 +127,8 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 15,
                               ),
                             ),
+
+                            //Gestiona la entrada de las contraseñas
                             const SizedBox(height: 5),
                             TextField(
                               obscureText: _obscureText,
@@ -159,6 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                                         : Icons.visibility,
                                   ),
                                   onPressed: () {
+                                    //oscurece el testo
                                     setState(() {
                                       _obscureText = !_obscureText;
                                     });
@@ -166,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
-                            GestureDetector(
+                            GestureDetector( //Te redirige a la pagina para cambiar contraseñas
                               child: Padding(
                                 padding: const EdgeInsets.only(
                                   left: 190.0,
@@ -182,6 +186,11 @@ class _LoginPageState extends State<LoginPage> {
                                 );
                               },
                             ),
+
+                            /// - Construye un botón que permite al usuario iniciar sesión con correo electrónico y contraseña.
+                            /// - Usa el servicio `AuthService` para autenticar las credenciales proporcionadas.
+                            /// - Si la autenticación es exitosa, redirige al usuario a la página principal (`Homepage`).
+                            /// - Si la autenticación falla, muestra un mensaje de error en la consola.
                             const SizedBox(height: 30),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -192,15 +201,18 @@ class _LoginPageState extends State<LoginPage> {
                                     backgroundColor: Color(0xFFEC6666),
                                   ),
                                   onPressed: () async {
+                                    //Captura los datos del usuario
                                     String email = emailController.text;
                                     String password = passwordController.text;
 
+                                    //Llama al servicio de autentificacion
                                     AuthService auth = AuthService();
                                     User? user = await auth.signInWithEmail(
                                       email,
                                       password,
                                     );
 
+                                    //Maneja la autentificacion
                                     if (user != null) {
                                       debugPrint('Bienvenido ${user.email}');
 
@@ -235,12 +247,18 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
+
                 Padding(
+
                   padding: const EdgeInsets.only(
                     top: 15.0,
                     right: 135,
                     left: 135,
                   ),
+
+                  /// - Utiliza el servicio `GoogleAuth` para manejar el inicio de sesión con Google.
+                  /// - Redirige al usuario a la página principal si la autenticación es exitosa.
+                  /// - Muestra un mensaje de error en caso de fallar.
                   child: GestureDetector(
                     child: Image.asset(
                       "lib/icons/google_icon.png",
@@ -248,9 +266,11 @@ class _LoginPageState extends State<LoginPage> {
                       height: 40,
                     ),
                     onTap: () async {
+                      //Llama al servicio de autentificacion de Google
                       GoogleAuth auth = GoogleAuth();
                       User? user = await auth.signInWithGoogle();
 
+                      //Maneja la autentificacion
                       if (user != null) {
                         debugPrint('Bienvenido ${user.email}');
 
@@ -279,6 +299,8 @@ class _LoginPageState extends State<LoginPage> {
                           color: Color(0xFF2E405A),
                         ),
                       ),
+                      /// - Muestra un texto que pregunta al usuario si no tiene una cuenta.
+                      /// - Incluye un enlace que redirige a la página de registro (`RegisterPage`).
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(
@@ -300,12 +322,17 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 30.0),
+                /// - Permite al usuario iniciar sesión de manera anónima utilizando `FirebaseAuth`.
+                  /// - Redirige al usuario a la página principal si el inicio de sesión es exitoso.
+                  /// - Muestra un mensaje de error en caso de falla.
                 GestureDetector(
                   onTap: () async {
                     try {
+                      //Inicia sesion de anonima
                       UserCredential userCredential =
                           await FirebaseAuth.instance.signInAnonymously();
 
+                      // Verifica si el usuario anónimo es válido.
                       User? user = userCredential.user;
 
                       if (user != null) {

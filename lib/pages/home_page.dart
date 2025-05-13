@@ -43,6 +43,7 @@ class _HomepageState extends State<Homepage> {
     const MyTab(iconPath: 'lib/icons/pizza.png', tabName: 'Pizza'),
   ];
 
+//Funcion principal de la interfaz
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -70,6 +71,8 @@ class _HomepageState extends State<Homepage> {
                   User? user = FirebaseAuth.instance.currentUser;
 
                   if (user != null && !user.isAnonymous) {
+                    //Si el usuario no ingresa campos o ingresa como anonimo, le salta un mensaje indicando que inicie sesion 
+                    //y en la consola de depuracion se encuentra como acceso denegado
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -77,7 +80,7 @@ class _HomepageState extends State<Homepage> {
                       ),
                     );
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar( 
                       SnackBar(
                         content: const Text(
                           'Para acceder debes iniciar sesión',

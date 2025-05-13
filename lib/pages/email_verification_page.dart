@@ -4,16 +4,23 @@ import 'package:donut_app/services/resend_email.dart';
 
 /// Página de verificación de correo electrónico.
 ///
-/// Muestra un mensaje al usuario indicando que se ha enviado un correo de verificación
-/// y proporciona opciones para reenviar el correo o cambiar la dirección de email.
+/// Esta página muestra un mensaje de confirmación al usuario indicando que se ha enviado
+/// un correo electrónico para verificar su dirección. También incluye opciones para reenviar
+/// el correo o cambiar la dirección de correo electrónico.
 class EmailVerificationPage extends StatelessWidget {
   final String email; // Dirección de correo electrónico a verificar
 
+/// Constructor que recibe:
   const EmailVerificationPage({super.key, required this.email});
 
+  /// Función principal que construye la interfaz de verificación de email
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+  /// Construye la AppBar con:
+  /// - Título centrado
+  /// - Botón de retroceso que redirige al Login
       appBar: AppBar(
         backgroundColor: const Color(0xFFE0E0E0),
         elevation: 0,
@@ -24,7 +31,7 @@ class EmailVerificationPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        centerTitle: true,
+        centerTitle: true, // Centra el título
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Color(0xFFEC6666)),
           onPressed: () {
@@ -71,6 +78,7 @@ class EmailVerificationPage extends StatelessWidget {
                 const SizedBox(height: 10),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.0),
+                   /// Descripción detallada con instrucciones para el usuario.
                   child: Text(
                     'We have sent a verification link to $email. \n\n'
                     'Clic on the link to complete the verification process. \n'
@@ -92,6 +100,7 @@ class EmailVerificationPage extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
+                /// Botón para cambiar la dirección de correo electrónico.
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(

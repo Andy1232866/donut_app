@@ -10,6 +10,10 @@ import 'package:donut_app/pages/email_verification_page.dart';
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
+
+/// Esta clase implementa una interfaz gráfica para registrar nuevos usuarios en la aplicación.
+/// Permite capturar información como el nombre completo, nombre de usuario, correo electrónico y contraseña.
+/// Además, ofrece opciones para subir una foto de perfil desde la galería y validar el correo electrónico posteriormente.
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
