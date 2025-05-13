@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:donut_app/pages/login_page.dart';
 import 'package:donut_app/services/resend_email.dart';
 
+/// Página de verificación de correo electrónico.
+///
+/// Muestra un mensaje al usuario indicando que se ha enviado un correo de verificación
+/// y proporciona opciones para reenviar el correo o cambiar la dirección de email.
 class EmailVerificationPage extends StatelessWidget {
-  final String email;
+  final String email; // Dirección de correo electrónico a verificar
 
   const EmailVerificationPage({super.key, required this.email});
 

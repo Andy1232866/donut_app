@@ -15,14 +15,14 @@ import 'package:flutter/foundation.dart'
 /// );
 /// ```
 class DefaultFirebaseOptions {
-  static FirebaseOptions get currentPlatform {
-    if (kIsWeb) {
+  static FirebaseOptions get currentPlatform { //Método estático que devuelve las configuraciones de Firebase dependiendo de la plataforma en la que se ejecuta la app
+    if (kIsWeb) { // Si la app está en ejecución en la web, retorna las configuraciones para la plataforma web.
       return web;
     }
-    switch (defaultTargetPlatform) {
-      case TargetPlatform.android:
+    switch (defaultTargetPlatform) { // Detecta la plataforma actual y retorna las configuraciones correspondientes:
+      case TargetPlatform.android: //: Configuración para Android.
         return android;
-      case TargetPlatform.iOS:
+      case TargetPlatform.iOS: //otras plataformas Lanza una excepción porque no están configuradas.
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for ios - '
           'you can reconfigure this by running the FlutterFire CLI again.',
@@ -50,15 +50,15 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCOXoFqcSvw2WVQ98YSf1wrE8HuSiBrXSY',
-    appId: '1:696637667287:web:150d7936f0da1d20877d92',
-    messagingSenderId: '696637667287',
-    projectId: 'donut-app1',
-    authDomain: 'donut-app1.firebaseapp.com',
-    storageBucket: 'donut-app1.firebasestorage.app',
+    apiKey: 'AIzaSyCOXoFqcSvw2WVQ98YSf1wrE8HuSiBrXSY', //Clave de la API utilizada para la autenticación y otros servicios.
+    appId: '1:696637667287:web:150d7936f0da1d20877d92', // ID único de la aplicación Firebase para la plataforma web.
+    messagingSenderId: '696637667287', //ID utilizado para enviar notificaciones push a través de Firebase Cloud Messaging.
+    projectId: 'donut-app1', //ID del proyecto Firebase.
+    authDomain: 'donut-app1.firebaseapp.com', // Dominio de autenticación para la web.
+    storageBucket: 'donut-app1.firebasestorage.app', //URL del bucket de almacenamiento en Firebase Storage.
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
+  static const FirebaseOptions android = FirebaseOptions( //configuraciones similares pero para android
     apiKey: 'AIzaSyBCjHKqRPoO9WDSG6Ct8rpi82lAkserD5A',
     appId: '1:696637667287:android:fcb9ba6046774018877d92',
     messagingSenderId: '696637667287',
